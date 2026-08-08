@@ -54,6 +54,7 @@ func  IsValidSubsequence(array []int, sequence []int) bool {
 		}
 	}
 	return sequenceIndex == len(sequence)
+	
 }
 
 
@@ -88,12 +89,148 @@ func MoveElementToEnd(array []int, toMove int) []int {
 
 
 
+
+
+
+//! 6 
+
+func SortedSquares(nums []int) []int {
+	numsSort := []int{}
+	for i := 0; i < len(nums); i++ {
+		if nums[i] < 0 {
+			fmt.Println(nums[i])
+			nums[i] = -nums[i]
+			numsSort = append(numsSort, nums[i] * nums[i])
+		} else {
+			numsSort = append(numsSort, nums[i] * nums[i])
+		}
+		for k := 0; k < len(numsSort)-1; k++ {
+			if numsSort[k] > numsSort[k+1] {
+				numsSort[k], numsSort[k+1] = numsSort[k+1], numsSort[k]
+			}
+		}
+	}
+	return numsSort
+}
+
+
+//! 7
+
+
+func LeftRightDifference(nums []int) []int {
+	result := []int{}
+	for i := 0; i < len(nums); i++ {
+		left := 0
+		right := 0
+
+		for k := 0; k < len(nums); k++ {
+			if k < i {
+				left += nums[k]
+			} else if k > i {
+				right += nums[k]
+			}
+		}
+		if left > right {
+			result = append(result, -1)
+		} else if left < right {
+			result = append(result, 1)
+		} else {
+			result = append(result, 0)
+		}
+	}
+	return result
+}
+
+//! 8
+
+
+func IsMonotonic(array []int) bool {
+
+	if len(array)-1 == 0 {
+		return true	
+	}
+	count := 0
+	for i := 0; i < len(array)-1; i++ {
+		if array[count] == array[count+1] {
+			count++
+		}else if array[count] < array[count+1] {
+			if array[i] > array[i+1] {
+				return false
+			}
+		} else if array[count] > array[count+1] { 
+			if array[i] < array[i+1] {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+
+//! 9
+
+func  BestSeat(seats []int) int {
+	count := 0
+	max := 0
+	index := 0
+	for i := 0; i < len(seats); i++ {
+		if seats[i] != 1 {
+			count++
+		} else if seats[i] == 1 {
+			if max < count {
+				max = count
+				index = i
+			} 
+				count = 0 
+		}
+	}
+
+	if max == 0 {
+		return -1
+	}
+
+	max, index = max/2, index-1
+	result := index-max
+	if seats[result] == 0 {
+		seats[result] = 1
+		return result
+	}
+	return -1
+}
+
+//! 10
+
+
+
 func main() {
 
-	array := []int{5, 5, 5, 5, 5, 5, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12}
-	targetElement := 5
-	resulstElement := MoveElementToEnd(array, targetElement)
-	fmt.Println(resulstElement)
+	seats := []int{1,1,1}
+	resultSeats := BestSeat(seats)
+	fmt.Println(resultSeats)
+
+
+
+	// moton := []int{1, 2, 3, 3, 2, 1}
+	// resultMoton := IsMonotonic(moton)
+	// fmt.Println(resultMoton)
+
+
+	// numDifference := []int{1,2,3,4}
+	// resultDifference := LeftRightDifference(numDifference)
+	// fmt.Println(resultDifference)
+
+
+
+	// numUnsort := []int{-4,-23,0,3,10}
+	// resultSort := SortedSquares(numUnsort)
+	// fmt.Println(resultSort)
+
+
+
+	// array := []int{5, 5, 5, 5, 5, 5, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12}
+	// targetElement := 5
+	// resulstElement := MoveElementToEnd(array, targetElement)
+	// fmt.Println(resulstElement)
 
 	// nums := []int{1,2,3,4,5,6,7}
 	// target := 3
