@@ -56,11 +56,26 @@ func  IsPalindrome(str string) bool {
 }
 //! 4 
 
-
-
+func strStr(haystack string, needle string) int {
+	count := 0
+	for i := 0; i < len(haystack); i++ {
+		if haystack[i] == needle[count] {
+			count++
+			if count == len(needle) {
+				return i - count + 1
+			}
+		} else {
+			count = 0
+		}
+	}
+	return -1
+}
 func main() {
 	 
-
+	haystack := "aabaab"
+	needle := "aab"
+	resultPalindrome := strStr(haystack, needle)
+	fmt.Println(resultPalindrome)
 
 
 	// palindrome := "a"

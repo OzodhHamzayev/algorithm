@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"unicode"
 )
 
 //! 1
@@ -402,14 +403,379 @@ func LargestRange(array []int) []int {
 	return result
 }
 
+//! 19
+
+func containsNearbyDuplicate(nums []int, k int) bool {
+    m := make(map[int]int)
+	for i := 0; i < len(nums); i++ {
+		_, ok := m[nums[i]]
+		if ok {
+			if i-m[nums[i]] <= k {
+				return true
+			} 
+		}
+		m[nums[i]] = i
+	}
+	return false
+}
+
+//! 20
+
+func containsDuplicate(nums []int) bool {
+	m := make(map[int]bool)
+    for i := 0; i < len(nums); i++ {
+		if m[nums[i]] == true {
+			return true
+		}
+		m[nums[i]] = true
+	}
+	return false
+}
+//! 21
+
+
+func intersectionisSubsequence(s string, t string) bool {
+	count := 0
+	if len(s) == 0 {
+		return true
+	}
+	for i := 0; i < len(t); i++ {
+		if s[count] == t[i] {
+			count++
+		}
+		if count == len(s) {
+			return true
+		}
+	}
+	return false
+}
+
+
+//! 22 o(n)
+
+func intersection(nums1 []int, nums2 []int) []int {
+	result := []int{}
+	m := make(map[int]bool)
+
+	for i := 0; i < len(nums1); i++ {
+		m[nums1[i]] = true
+	}
+	for i := 0; i < len(nums2); i++ {
+		if m[nums2[i]] {
+			result = append(result, nums2[i])
+			m[nums2[i]] = false
+		}
+	}
+
+	return result
+}
+
+//! 23
+
+func intersect(nums1 []int, nums2 []int) []int {
+	result := []int{}
+	m := make(map[int]int)
+
+	for i := 0; i < len(nums1); i++ {
+		m[nums1[i]]++
+	}
+
+	for i := 0; i < len(nums2); i++ {
+		if m[nums2[i]] >= 1 {
+			result = append(result, nums2[i])
+			m[nums2[i]]--
+		}
+	}
+	return result
+}
+
+
+//! 24
+
+func getCommon(nums1 []int, nums2 []int) int {
+	m := make(map[int]bool)
+    for i := 0; i < len(nums1); i++ {
+		m[nums1[i]] = true
+	}
+
+	for i := 0; i < len(nums2); i++ {
+		fmt.Println(i)
+		if m[nums2[i]] == true {
+			return nums2[i]
+		}
+	}
+	return -1
+}
+
+//! 25
+
+func getCommon2(nums1 []int, nums2 []int) int {
+	i, j := 0, 0
+	for i < len(nums1) && j < len(nums2) {
+		if nums1[i] == nums2[j] {
+			return nums1[i]
+		} else if nums1[i] > nums2[j] { 
+			j++
+		} else {
+			i++
+		}
+	} 
+	return -1
+}
+
+
+//! 26
+
+// func lengthOfLongestSubstring(s string) int {
+// 	m := make(map[byte]bool)
+// 	for i := 0; i < len(s); i++ {
+// 		if m[s[i]] == true {
+// 			return i
+// 		}
+// 		m[s[i]] = true
+// 	}
+// 	return -1
+// }
+
+//! 27x
+
+func findTheDifference(s string, t string) byte {
+	m := make(map[byte]int)
+	for i := 0; i < len(s); i++ {
+		m[s[i]]++
+	}
+	for i := 0; i < len(t); i++ {
+		if m[t[i]] > 0 {
+			m[t[i]]--
+		} else {
+			return t[i]
+		}
+	}
+	return 0 
+}
+
+
+//! 28 
+
+// func minSubArrayLen(target int, nums []int) int {
+//     shrink := 0
+// 	sum := 0
+// 	count := 0
+// 	for i := 0; i < len(nums); i++ {
+// 		sum += nums[i]
+// 		for sum >= target {
+// 			sum -= nums[shrink]
+// 			shrink++
+// 			if sum == target  {
+// 				if count == 0 {
+// 					count = i - shrink
+// 				} else if count > i - shrink {
+// 					count = i-shrink
+// 				}
+// 			}
+// 		}
+
+// 	}
+// 	return shrink
+// }
+//! 29 (leetcode 167) -> 0(n)/0(1) space complexity -> sorted
+
+func twoSum(nums []int, target int) []int {
+	left, right := 0, len(nums)-1
+	for left < right { 
+		sum := nums[left] + nums[right]
+		if sum == target {
+			return []int{left, right}
+		} else if sum > target {
+			right--
+		} else {
+			left++
+		}
+	}
+	return []int{}
+}
+
+//! 30 
+
+func isAnagram(s string, t string) bool {
+    if len(s) != len(t) {
+        return false
+    }
+    m := make(map[byte]int)
+    for i := 0; i < len(s); i++ {
+        m[s[i]]++
+    }
+    for i := 0; i < len(t); i++ {
+        if m[t[i]] == 0 {
+            return false
+        }
+        m[t[i]]--
+    }
+    return true
+}
+
+
+//! 31
+
+func isPalindrome(s string) bool {
+	left, right := 0, len(s)-1
+
+	for left < right  { 
+		if !unicode.IsLetter(rune(s[left])) && !unicode.IsDigit(rune(s[left])) {
+			left++
+			continue
+		} 
+		if !unicode.IsLetter(rune(s[right])) && !unicode.IsDigit(rune(s[right])) {
+			right--
+			continue
+		} 
+		leftChar := unicode.ToLower(rune(s[left]))
+		rightChar := unicode.ToLower(rune(s[right]))
+		if leftChar != rightChar {
+			return false
+		}
+		left++
+		right--
+	}
+
+	return true
+}
+//! 32
+func singleNumber(nums []int) int {
+	result := 0
+    for i := 0; i < len(nums); i++ {
+		result ^= nums[i]
+	}
+	return result
+}
+
+//! 33
+
+func maxArea(height []int) int {
+
+	maxArea := 0
+    left, right := 0 , len(height)-1
+	
+	for left < right { 
+		area := 0
+		area = min(height[left], height[right]) * (right-left)
+		if area > maxArea  {
+			maxArea = area
+		}
+
+		if height[left] > height[right] {
+			right--
+		} else {
+			left++
+		}
+	}
+	return maxArea
+}
+
+//! 34
+
 
 
 func main() {
 
 
-	nums := []int{4, 2, 1, 3, 6}
-	result := LargestRange(nums)
-	fmt.Println(result)
+	// nums:= []int{1,8,6,2,5,4,8,3,7}
+	// result := maxArea(nums)
+	// fmt.Println(result)
+
+
+
+
+	// fmt.Println(7^3)
+	// nums:= []int{4,1,2,1,2,4,7}
+	// result := singleNumber(nums)
+	// fmt.Println(result)
+
+
+	// s:= "a77a"
+	// result := isPalindrome(s)
+	// fmt.Println(result)
+
+
+	// s:= "ab"
+	// t := "aba"
+	// result := isAnagram(s, t)
+	// fmt.Println(result)
+
+
+	// nums:= []int{1,2,3,4}
+	// target := 6
+	// result := twoSum(nums, target)
+	// fmt.Println(result)
+
+
+
+	// nums:= []int{2,3,1,2,4,3}
+	// target := 7
+	// result := minSubArrayLen(target, nums)
+	// fmt.Println(result)
+
+
+
+	// word1:= "a"
+	// word2:= "aa"
+	// result := findTheDifference(word1, word2)
+	// fmt.Println(result)
+
+
+
+
+
+	// word:= "pwwkew"
+	// result := lengthOfLongestSubstring(word)
+	// fmt.Println(result)
+
+
+	// nums1 := []int{1,2,3,4,5,6,7,1,1,1,1,1,1,1,1}
+	// nums2 := []int{4}
+	// result := getCommon2(nums1, nums2)
+	// fmt.Println(result)
+
+
+	// nums1 := []int{19}
+	// nums2 := []int{4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,11}
+	// result := getCommon(nums1, nums2)
+	// fmt.Println(result)
+
+
+	// nums1 := []int{4,9,5,4,1}
+	// nums2 := []int{4,9,5,4,9,5,1,1}
+	// result := intersect(nums1, nums2)
+	// fmt.Println(result)
+
+
+
+	// nums1 := []int{4,9,5}
+	// nums2 := []int{4,9,5,4,9,5}
+	// result := intersection(nums1, nums2)
+	// fmt.Println(result)
+
+
+	// word1 := ""
+	// word2 := "ahbgdc"
+	// result := isSubsequence(word1, word2)
+	// fmt.Println(result)
+
+	// nums := []int{1,2,3,4}
+	// result := containsDuplicate(nums)
+	// fmt.Println(result)
+
+
+	// nums := []int{1,1}
+	// target := 2
+	// result := containsNearbyDuplicate(nums, target)
+	// fmt.Println(result)
+
+
+
+	// nums := []int{4, 2, 1, 3, 6}
+	// result := LargestRange(nums)
+	// fmt.Println(result)
 
 
 
