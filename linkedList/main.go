@@ -28,6 +28,24 @@ func (h *Head) insert(value int) {
 	current.next = valueNode
 }
 
+func (l *Head) delete(value int)  { 
+	if l.Head != nil {
+		if l.Head.value == value {
+			l.Head = l.Head.next
+			return
+		}
+	}
+		
+	current := l.Head
+	if current.next != nil {
+		for current.next.value != value {
+			current = current.next
+		}
+		current.next = current.next.next
+	}
+	
+}
+
 func (h *Head) print() {
 	current := h.Head
 	for current != nil { 
@@ -38,12 +56,13 @@ func (h *Head) print() {
 
 func main() {
 	node := Head{}
-	node.insert(12)
-	node.insert(11)
 	node.insert(10)
-	node.insert(9)
-	node.insert(9)
-	node.insert(7)
+	node.insert(20)
+	node.insert(30)
+	node.insert(40)
+	node.insert(50)
+	node.insert(60)
+	node.delete(50)
 	node.print()
 
 }
