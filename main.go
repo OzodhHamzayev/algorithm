@@ -636,8 +636,7 @@ func isPalindrome(s string) bool {
 		}
 		left++
 		right--
-	}
-
+		}
 	return true
 }
 //! 32
@@ -675,9 +674,235 @@ func maxArea(height []int) int {
 //! 34
 
 
+func getConcatenation(nums []int) []int {
+	a := len(nums)
+    for i := 0; i < a; i++ {
+		nums = append(nums, nums[i])
+	}
+	return nums
+}
+
+
+//! 35 
+
+
+
+// func lengthOfLongestSubstring(s string) int {
+// 	longest := 0
+// 	left := 0
+// 	m := make(map[byte]bool)
+// 	for i := 0; i < len(s); i++ {
+// 		if  m[s[i]] == false {
+// 			left++
+// 			w := (i - left)+1
+// 			longest = max(longest, w)
+// 		}
+// 		m[s[left]] = true
+// 	} 
+		
+// 	return longest
+// }
+
+
+//! 36
+
+
+func judgeCircle(moves string) bool {
+	x := 0
+	y := 0
+
+    for i := 0; i < len(moves); i++ {
+		switch string(moves[i]) {
+			case "R":
+				x++
+			case "L":
+				x--
+			case "U":
+				y++
+			case "D":
+				y--
+		}
+	}
+	return x == 0 && y == 0 
+}
+
+//! 37
+
+func findMaxConsecutiveOnes(nums []int) int {
+    count := 0
+	maxCount := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == 1 {
+			count++
+			if maxCount < count {
+				maxCount = count
+			}
+		} else{
+			count = 0
+		}
+	}
+	return maxCount
+}
+
+//! 38
+
+func shuffle(nums []int, n int) []int {
+    result := make([]int,0, 2*n)
+	for i := 0; i < n; i++ {
+		result = append(result, nums[i], nums[i+n])
+	}
+	return result
+}
+
+//! 39
+
+func isMonotonic(nums []int) bool {
+	count := 0
+	first, last := 0, len(nums)-1
+
+    for i := 0; i < len(nums)-1; i++ {
+		if nums[i] <= nums[i+1] && nums[first] <= nums[last] {
+			count++
+		} else if nums[i] >= nums[i+1] && nums[first] > nums[last] {
+			count--
+		}
+	}
+	if -(count) == len(nums)-1{
+		return true
+	} else if count == len(nums)-1 {
+		return true
+	}
+	return false
+}
+//! 40 -> 
+
+func isMonotonic2(nums []int) bool {
+    increasing := true
+    decreasing := true
+
+
+    for i := 1; i < len(nums); i++ {
+        if nums[i] < nums[i-1] {
+            increasing = false
+        }
+
+
+        if nums[i] > nums[i-1] {
+            decreasing = false
+        }
+    }
+
+	fmt.Println(increasing)
+	fmt.Println(decreasing)
+    return increasing || decreasing
+}
+
+//! 41
+
+func prefixSum(nums []int) []int {
+	result := []int{}
+	sum := 0
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		result = append(result, sum)
+	}
+	return result		
+}
+
+//! 42
+
+func fixedSize(nums []int, k int) []int {
+	 shrink := 0
+	 sum := 0
+	 result := []int{}
+
+	 for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		if i-shrink+1 == k {
+			result = append(result, sum)
+			sum -= nums[shrink]
+			shrink++
+		}
+	 }
+	 return result 
+}
+
+//! 43 -> ++++++++++++++++++++++++
+
+func findMaxAverage(nums []int, k int) float64 {
+    shrink := 0
+	sum := 0
+	maxResult := 0
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		if i-shrink+1 == k {
+			if maxResult == 0 {
+				maxResult = sum
+			} else if maxResult < sum {
+				maxResult = sum
+			}
+			sum -= nums[shrink]
+			shrink++
+		}
+	}
+	return float64(maxResult)/float64(k)
+}
+
 
 func main() {
 
+
+	nums:= []int{1,12,-5,-6,50,3}
+	k := 4
+	result := findMaxAverage(nums, k)
+	fmt.Println(result)
+
+
+
+	// nums:= []int{1,2,3,4,5,6}
+	// k := 3
+	// result := fixedSize(nums, k)
+	// fmt.Println(result)
+
+
+
+	// nums:= []int{1,2,3,4,5}
+	// result := prefixSum(nums)
+	// fmt.Println(result)
+
+	// nums:= []int{1,2,3,4,5}
+	// result := isMonotonic2(nums)
+	// fmt.Println(result)
+
+
+	// nums:= []int{4,4,4,4}
+	// result := isMonotonic(nums)
+	// fmt.Println(result)
+
+	// nums:= []int{2,5,1,3,4,7}
+	// n := 3
+	// result := shuffle(nums, n)
+	// fmt.Println(result)
+
+
+	// nums:= []int{1,1,0,1,1,1}
+	// result := findMaxConsecutiveOnes(nums)
+	// fmt.Println(result)
+
+	
+	// moves:= "RRLLDDDUUU"
+	// result := judgeCircle(moves)
+	// fmt.Println(result)
+
+
+	// word:= "abcabcbb"
+	// result := lengthOfLongestSubstring(word)
+	// fmt.Println(result)
+
+
+	// nums:= []int{1,2,3,4}
+	// result := getConcatenation(nums)
+	// fmt.Println(result)
 
 	// nums:= []int{1,8,6,2,5,4,8,3,7}
 	// result := maxArea(nums)

@@ -70,12 +70,63 @@ func strStr(haystack string, needle string) int {
 	}
 	return -1
 }
+
+
+//! 5
+
+func firstUniqChar(s string) int {
+	m := make(map[byte]int, 26)
+
+    for i := 0; i < len(s); i++ {
+		m[s[i]]++
+	}
+
+	for i := 0; i < len(s); i++ {
+		if m[s[i]] == 1 {
+			return i	
+		}	 
+	}
+	return 	-1
+}
+
+//! 6
+
+func numJewelsInStones(jewels string, stones string) int {
+    m := make(map[byte]bool)
+	count := 0
+	for i := 0; i < len(jewels); i++ {
+		m[jewels[i]] = true
+	}
+	for i := 0; i < len(stones); i++ {
+		if m[stones[i]] == true {
+			count++
+		}
+	}
+	return count
+}
+
+//! 7
+
 func main() {
-	 
-	haystack := "aabaab"
-	needle := "aab"
-	resultPalindrome := strStr(haystack, needle)
+
+
+	jewels := "aA"
+	stones := "aAAbbbb"
+	resultPalindrome := numJewelsInStones(jewels, stones)
 	fmt.Println(resultPalindrome)
+
+
+
+	// s := "loveleetcode"
+	// resultPalindrome := firstUniqChar(s)
+	// fmt.Println(resultPalindrome)
+
+
+	 
+	// haystack := "aabaab"
+	// needle := "aab"
+	// resultPalindrome := strStr(haystack, needle)
+	// fmt.Println(resultPalindrome)
 
 
 	// palindrome := "a"
