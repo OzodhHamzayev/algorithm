@@ -848,14 +848,85 @@ func findMaxAverage(nums []int, k int) float64 {
 	return float64(maxResult)/float64(k)
 }
 
+//! 44
+
+
+func ContainsDuplicate(nums []int) bool {
+	m := make(map[int]bool)
+	for i := 0; i < len(nums); i++ {
+		if m[nums[i]] == true {
+			return true
+		}
+		m[nums[i]] = true
+	}
+	return false
+}
+
+
+//! 45 -> O(n)
+
+
+func TwoSum(nums []int, target int) []int {
+	m := make(map[int]int)
+
+	for i := 0; i < len(nums); i++ {
+		need := target - nums[i]
+		if _ , ok := m[need]; ok {
+			if m[need] != i {
+				return []int{m[need], i}
+			}
+		}
+		m[nums[i]] = i
+
+	}
+	
+	return []int{}
+}
+
+
+//! 46
+
+func lengthOfLongestSubstring(s string) int {
+	m := make(map[byte]bool)
+
+	count := 0
+	left := 0
+
+	for right := 0; right < len(s); right++ {
+
+		for m[s[right]] {
+			delete(m, s[left])
+			left++
+		}
+
+		m[s[right]] = true
+
+		if right-left+1 > count {
+			count = right - left + 1
+		}
+	}
+
+	return count
+}
+//! 47
+
 
 func main() {
 
-
-	nums:= []int{1,12,-5,-6,50,3}
-	k := 4
-	result := findMaxAverage(nums, k)
+	word:= "qwwkew"
+	result := lengthOfLongestSubstring(word)
 	fmt.Println(result)
+
+
+	// nums:= []int{3,3}
+	// target := 9
+	// result := TwoSum(nums, target)
+	// fmt.Println(result)
+
+
+	// nums:= []int{1,2,3,3}
+	// result := ContainsDuplicate(nums)
+	// fmt.Println(result)
 
 
 
