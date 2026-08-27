@@ -911,11 +911,144 @@ func lengthOfLongestSubstring(s string) int {
 //! 47
 
 
+func missingMultiple(nums []int, k int) int {
+    m := make(map[int]bool)
+
+    for i := 0; i < len(nums); i++ {
+        m[nums[i]] = true
+    }
+
+	for need := k; ; need += k {
+		if !m[need] {
+			return need
+		}
+	}
+}
+//! 48
+
+func canPlaceFlowers(flowerbed []int, n int) bool {
+    count := 0
+	flowerbed = append([]int{0}, flowerbed...)
+	flowerbed = append(flowerbed, 0)
+	for i := 0; i < len(flowerbed)-1; i++ {
+		if flowerbed[i] == 1 {
+			count = 0
+		} else if n > 0 {
+			if count == 1 && flowerbed[i+1] != 1 {
+				flowerbed[i] = 1			
+				count = 0 
+				n--
+			} else { 
+				count++
+			}
+		}
+	}
+	return n == 0
+}
+
+//! 49
+
+func moveZeroes(nums []int)  {
+	left, right := 0,0
+	for right < len(nums)  {
+		if nums[right] == 0 {
+			right++
+		} else {
+			nums[left], nums[right] = nums[right], nums[left]
+			right++
+			left++
+		}
+	}
+}
+
+//! 50
+
+func maxOperations(nums []int, k int) int {
+    m := make(map[int]int)
+	count := 0
+	for i := 0; i < len(nums); i++ {
+		need := k-nums[i]
+		if m[need] > 0 {
+			count++
+			m[need]--
+		} else { 
+			m[nums[i]]++
+		}
+	}
+	return count
+}
+
+//! 51
+
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+	max := candies[0]
+	result := []bool{}
+    for i := 0; i < len(candies); i++ {
+		if max < candies[i] {
+			max = candies[i]
+		}
+	}
+	for i := 0; i < len(candies); i++ {
+		if candies[i]+extraCandies >= max {
+			result = append(result, true)
+		}else { 
+			result = append(result, false)
+		}
+	}
+	return result
+}
+//! 52
+
+
+
+
 func main() {
 
-	word:= "qwwkew"
-	result := lengthOfLongestSubstring(word)
-	fmt.Println(result)
+
+
+
+
+	// nums:= []int{2,0,1}
+	// sortColors(nums)
+
+	
+
+	// candies:= []int{2,3,5,1,3}
+	// extraCandies := 3
+	// result := kidsWithCandies(candies, extraCandies)
+	// fmt.Println(result)
+
+
+
+
+	// nums:= []int{3,3,3,3}
+	// k := 6
+	// result := maxOperations(nums, k)
+	// fmt.Println(result)
+
+
+
+
+	// nums:= []int{1}
+	// moveZeroes(nums)
+
+	// flowerbed:= []int{0,0,0}
+	// n := 2
+	// result := canPlaceFlowers(flowerbed, n)
+	// fmt.Println(result)
+
+
+
+	// nums:= []int{1,3,4,2,2}
+	// k := 99
+	// result := missingMultiple(nums, k)
+	// fmt.Println(result)
+
+
+
+	// word:= "qwwkew"
+	// result := lengthOfLongestSubstring(word)
+	// fmt.Println(result)
 
 
 	// nums:= []int{3,3}

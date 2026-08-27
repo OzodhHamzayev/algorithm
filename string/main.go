@@ -107,15 +107,85 @@ func numJewelsInStones(jewels string, stones string) int {
 
 //! 7
 
+func isVowel(c byte) bool {
+	return  c == 'a' || c == 'e' || c == 'i' ||
+        c == 'o' || c == 'u' ||
+        c == 'A' || c == 'E' || c == 'I' ||
+        c == 'O' || c == 'U'
+}
+
+func reverseVowels(s string) string {
+	chars := []byte(s)
+    left, right := 0, len(s)-1
+	for left < right { 
+		if !isVowel(s[left]) {
+			left++
+		}else if !isVowel(s[right]) { 
+			right--
+		} else if isVowel(s[left]) && isVowel(s[right]) {
+			chars[left], chars[right] = chars[right], chars[left]	
+			left++
+			right--
+		}
+	}
+	return string(chars)
+}
+//! 8
+
+func mergeAlternately(word1 string, word2 string) string {
+    i := 0
+	result := ""
+	for i < len(word1) && i < len(word2) {
+		result += string(word1[i])
+		result += string(word2[i])
+		i++
+	}
+	if i < len(word1) {
+		result += string(word1[i:])
+	} else if i < len(word2) { 
+		result += string(word2[i:])
+	}
+	return result
+}
+
+//! 9
+
+
+func lengthOfLastWord(s string) int {
+	count := 0
+	result := 0
+    for i := 0; i < len(s); i++ {
+		if string(s[i]) == " " {
+			count = 0
+		}else { 
+			count++
+			result = count
+		}
+
+	}
+	return result
+}
 
 
 func main() {
 
+	s := "   fly me   to   the moon  "
+	result := lengthOfLastWord(s)
+	fmt.Println(result)
 
-	jewels := "aA"
-	stones := "aAAbbbb"
-	resultPalindrome := numJewelsInStones(jewels, stones)
-	fmt.Println(resultPalindrome)
+	// word1 := "ab"
+	// word2 := "pqrs"
+	// result := mergeAlternately(word1, word2)
+	// fmt.Println(result)
+
+	// word := "IceCreAm"
+	// resultPalindrome := reverseVowels(word)
+	// fmt.Println(resultPalindrome)
+
+	// jewels := "aA"
+	// stones := "aAAbbbb"
+	// resultPalindrome := numJewelsInStones(jewels, stones)
+	// fmt.Println(resultPalindrome)
 
 
 

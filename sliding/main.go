@@ -107,13 +107,76 @@ func longestSubarray(nums []int, target int) int {
 	}
 	return count
 }
+
+//! 7
+func isVowels(c byte) bool { 
+	return c == 'a' ||  c == 'e' ||c == 'i'||c == 'u'||c == 'o'
+}
+
+func maxVowels(s string, k int) int {
+	left, right := 0, 0
+    maximum := 0
+	count := 0
+	for right < len(s) {
+		if right-left+1 <= k {
+			if isVowels(s[right]) {
+				count++
+			}
+			right++
+			maximum = max(maximum, count)
+		} else { 
+			if isVowels(s[left]) {
+				count--	
+			}
+			left++
+		}
+	}
+	return maximum
+}
+
+
+//! 8
+
+func minSubArrayLen(target int, nums []int) int {
+	sum := 0
+	minimum := 0
+	shrink := 0
+    for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		for sum >= target {
+			if minimum == 0 {
+				minimum = i-shrink+1
+			}else { 
+				minimum = min(i-shrink+1, minimum)
+			}
+			sum -= nums[shrink]
+			shrink++
+		}
+	}
+	return minimum
+}
+
+
+//! 9
+
+
 func main() { 
 
-
-	nums := []int{17,1,1,1,1,1,11,1,0,0,0,0,0,0,0,0,0,0,0}
-	target := 17
-	result := longestSubarray(nums, target)
+	k := 7
+	nums := []int{2,3,1,2,4,3}
+	result := minSubArrayLen(k, nums)
 	fmt.Println(result)
+
+	// s := "abciiidef"
+	// k := 3
+	// result := maxVowels(s, k)
+	// fmt.Println(result)
+
+
+	// nums := []int{17,1,1,1,1,1,11,1,0,0,0,0,0,0,0,0,0,0,0}
+	// target := 17
+	// result := longestSubarray(nums, target)
+	// fmt.Println(result)
 
 	// nums := []int{2,3,2,19,3,10,3,8,5,0,4,4}
 	// target := 17
