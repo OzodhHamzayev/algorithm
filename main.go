@@ -2,51 +2,50 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"unicode"
 )
 
-//! 1
+// ! 1
 // TODO: 2 ta loop ishlatganimning sababi — value[0] va value[10]  dagi sonlarning yig‘indisi target ga teng bo‘lishi mumkin.
 // TODO Ular ketma-ket kelmasligi mumkin. Agar kerakli sonlar ketma-ket  kelganida, bitta loopdan foydalanardim.
 func TwoNumberSum(array []int, target int) []int {
-	lens := len(array)-1
+	lens := len(array) - 1
 	if lens == 0 {
 		return []int{}
 	}
 	for i := 0; i < len(array); i++ {
-		for k := i+1; k < len(array); k++ {
-			if array[i] + array[k] == target {
+		for k := i + 1; k < len(array); k++ {
+			if array[i]+array[k] == target {
 				if array[i] > array[k] {
 					return []int{array[k], array[i]}
 				}
-					return []int{array[i], array[k]}
-			} 
+				return []int{array[i], array[k]}
+			}
 		}
 	}
 	return []int{}
 }
 
-
-//! 2
-//TODO agar bizning index == 0 ga boladigan bolsa indexni joyini keyingi keladigan index bilan change qiladi va bu xolat bir 
-//TODO necha marta davom etgani uchun 2ta loop qildim 
+// ! 2
+// TODO agar bizning index == 0 ga boladigan bolsa indexni joyini keyingi keladigan index bilan change qiladi va bu xolat bir
+// TODO necha marta davom etgani uchun 2ta loop qildim
 func MoveZeroes(nums []int) []int {
-  for i := 0; i < len(nums)-1; i++ {
-    for k := 0; k < len(nums)-1; k++ {
-      if nums[k] == 0 {
-        nums[k], nums[k+1] = nums[k+1], nums[k]	
-      }
-    }
+	for i := 0; i < len(nums)-1; i++ {
+		for k := 0; k < len(nums)-1; k++ {
+			if nums[k] == 0 {
+				nums[k], nums[k+1] = nums[k+1], nums[k]
+			}
+		}
 	}
 	return nums
 }
 
-
-//! 3
-// TODO: arrayda taxminan 20 ta son bor. sequence arrayidagi qiymatlar  array ichida shu tartibda uchrashi kerak. 
-// TODO: sequenceIndex = 0 dan boshlaymiz. Loop orqali arrayni tekshiramiz.  Agar arraydagi biror qiymat sequence[0] ga teng bo‘lsa, sequenceIndex++ qilamiz. 
+// ! 3
+// TODO: arrayda taxminan 20 ta son bor. sequence arrayidagi qiymatlar  array ichida shu tartibda uchrashi kerak.
+// TODO: sequenceIndex = 0 dan boshlaymiz. Loop orqali arrayni tekshiramiz.  Agar arraydagi biror qiymat sequence[0] ga teng bo‘lsa, sequenceIndex++ qilamiz.
 // TODO: Keyingi iterationda sequence[1] bilan tekshiramiz. // Agar u ham mos kelsa, sequenceIndex yana oshadi va shu tarzda davom etadi.
-func  IsValidSubsequence(array []int, sequence []int) bool {
+func IsValidSubsequence(array []int, sequence []int) bool {
 	sequenceIndex := 0
 	for i := 0; i < len(array); i++ {
 		if sequenceIndex == len(sequence) {
@@ -57,28 +56,25 @@ func  IsValidSubsequence(array []int, sequence []int) bool {
 		}
 	}
 	return sequenceIndex == len(sequence)
-	
+
 }
 
-
-//! 4
-//TODO k -> nechta soni chap tomonga olib o'tishimizdagi qiymat. Biz birinchi loop da i < k qildik yani u faqat k marta loop
-//TODO aylanishi kerak masalan bizda nums := []int{1,2,3,4,5,6,7} va k = 3. ichki loop orqaga 3 marta yuradi va kerakli sonlar
-//TODO o'zgaradi
+// ! 4
+// TODO k -> nechta soni chap tomonga olib o'tishimizdagi qiymat. Biz birinchi loop da i < k qildik yani u faqat k marta loop
+// TODO aylanishi kerak masalan bizda nums := []int{1,2,3,4,5,6,7} va k = 3. ichki loop orqaga 3 marta yuradi va kerakli sonlar
+// TODO o'zgaradi
 func Rotate(nums []int, k int) []int {
 	for i := 0; i < k; i++ {
-		for j := len(nums)-1; j > 0; j-- {
+		for j := len(nums) - 1; j > 0; j-- {
 			nums[j], nums[j-1] = nums[j-1], nums[j]
-			
+
 		}
 	}
 	return nums
 }
 
-
-
-//! 5
-//TODO 2-masala bilan bir xil
+// ! 5
+// TODO 2-masala bilan bir xil
 func MoveElementToEnd(array []int, toMove int) []int {
 	for i := 0; i < len(array)-1; i++ {
 		for k := 0; k < len(array)-1; k++ {
@@ -90,12 +86,7 @@ func MoveElementToEnd(array []int, toMove int) []int {
 	return array
 }
 
-
-
-
-
-
-//! 6 
+//! 6
 
 func SortedSquares(nums []int) []int {
 	numsSort := []int{}
@@ -103,9 +94,9 @@ func SortedSquares(nums []int) []int {
 		if nums[i] < 0 {
 			fmt.Println(nums[i])
 			nums[i] = -nums[i]
-			numsSort = append(numsSort, nums[i] * nums[i])
+			numsSort = append(numsSort, nums[i]*nums[i])
 		} else {
-			numsSort = append(numsSort, nums[i] * nums[i])
+			numsSort = append(numsSort, nums[i]*nums[i])
 		}
 		for k := 0; k < len(numsSort)-1; k++ {
 			if numsSort[k] > numsSort[k+1] {
@@ -116,9 +107,7 @@ func SortedSquares(nums []int) []int {
 	return numsSort
 }
 
-
 //! 7
-
 
 // func LeftRightDifference(nums []int) []int {
 // 	result := []int{}
@@ -146,21 +135,20 @@ func SortedSquares(nums []int) []int {
 
 //! 8
 
-
 func IsMonotonic(array []int) bool {
 
 	if len(array)-1 == 0 {
-		return true	
+		return true
 	}
 	count := 0
 	for i := 0; i < len(array)-1; i++ {
 		if array[count] == array[count+1] {
 			count++
-		}else if array[count] < array[count+1] {
+		} else if array[count] < array[count+1] {
 			if array[i] > array[i+1] {
 				return false
 			}
-		} else if array[count] > array[count+1] { 
+		} else if array[count] > array[count+1] {
 			if array[i] < array[i+1] {
 				return false
 			}
@@ -169,10 +157,9 @@ func IsMonotonic(array []int) bool {
 	return true
 }
 
-
 //! 9
 
-func  BestSeat(seats []int) int {
+func BestSeat(seats []int) int {
 	count := 0
 	max := 0
 	index := 0
@@ -183,8 +170,8 @@ func  BestSeat(seats []int) int {
 			if max < count {
 				max = count
 				index = i
-			} 
-				count = 0 
+			}
+			count = 0
 		}
 	}
 
@@ -193,7 +180,7 @@ func  BestSeat(seats []int) int {
 	}
 
 	max, index = max/2, index-1
-	result := index-max
+	result := index - max
 	if seats[result] == 0 {
 		seats[result] = 1
 		return result
@@ -202,24 +189,6 @@ func  BestSeat(seats []int) int {
 }
 
 //! 10 ->
-
-
-func removeDuplicates(nums []int) int {
-
-	k := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[k] == nums[i] {
-			continue
-		} else {
-			nums[k+1], nums[i] = nums[i], nums[k+1]
-			k = k+1
-		}
-	}
-	return k+1
-}
-
-
-
 
 //! 11
 
@@ -250,7 +219,7 @@ func MoveElementToEnd2(array []int, toMove int) []int {
 //! 12-2
 
 func MoveElementToEnd3(array []int, toMove int) []int {
-	left, mid, right := 0,0, len(array)-1
+	left, mid, right := 0, 0, len(array)-1
 	for mid <= right {
 		if array[mid] == toMove {
 			mid++
@@ -263,21 +232,20 @@ func MoveElementToEnd3(array []int, toMove int) []int {
 	return array
 }
 
-
-//! 13 
+//! 13
 
 func MaxArea(nums []int) int {
 	left, right := 0, len(nums)-1
 	waterResult := 0
-	for left <= right { 
+	for left <= right {
 		water := 0
 		if nums[left] >= nums[right] {
-			water = nums[right] * (right-left)
+			water = nums[right] * (right - left)
 		} else {
-			water = nums[left] * (right-left)
+			water = nums[left] * (right - left)
 		}
 		if waterResult < water {
-		waterResult = water
+			waterResult = water
 		}
 		if nums[left] > nums[right] {
 			right--
@@ -293,12 +261,10 @@ func MaxArea(nums []int) int {
 
 //! 17
 
-
-
 func sortingElement(nums []int) []int {
-	 low, high := 0, len(nums)-1
-	 mid := (high+low)/2
-	 for low <= high {
+	low, high := 0, len(nums)-1
+	mid := (high + low) / 2
+	for low <= high {
 		if nums[mid] < nums[low] {
 			nums[mid], nums[low] = nums[low], nums[mid]
 			mid--
@@ -310,14 +276,13 @@ func sortingElement(nums []int) []int {
 		} else {
 			break
 		}
-	 }
-	 return nums
+	}
+	return nums
 }
 
+//! 14
 
-//! 14 
-
-  func FirstDuplicateValue(array []int) int {
+func FirstDuplicateValue(array []int) int {
 	m := make(map[int]bool)
 	for i := 0; i < len(array); i++ {
 
@@ -325,16 +290,16 @@ func sortingElement(nums []int) []int {
 			return array[i]
 		}
 		m[array[i]] = true
-		
+
 	}
-    return -1
-  }
+	return -1
+}
 
 //! 15  -> o(n kvadrat)
 
 func ZeroSumSubarray(nums []int) bool {
 	for i := 0; i < len(nums); i++ {
-	sum := 0
+		sum := 0
 		for k := i; k < len(nums); k++ {
 			sum += nums[k]
 			if sum == 0 {
@@ -345,43 +310,42 @@ func ZeroSumSubarray(nums []int) bool {
 	return false
 }
 
-
 //! 16 -> o(n kvadrat)
 
-
-func  FirstNonRepeatingCharacter(str string) int {
+func FirstNonRepeatingCharacter(str string) int {
 	m := make(map[byte]bool)
 	for i := 0; i < len(str); i++ {
 
-		for k := i+1; k < len(str); k++ {
+		for k := i + 1; k < len(str); k++ {
 			if str[i] == str[k] {
 				m[str[i]] = true
-			} 
+			}
 		}
-		if m[str[i]] == false  {
+		if m[str[i]] == false {
 			return i
 		}
 	}
 
 	return -1
 }
-//! 17 -> o(n)
-func  FirstNonRepeatingCharacter2(str string) int {
-    m := make(map[byte]int)
 
-    for i := 0; i < len(str); i++ {
-        m[str[i]]++
-    }
+// ! 17 -> o(n)
+func FirstNonRepeatingCharacter2(str string) int {
+	m := make(map[byte]int)
 
-		for i := 0; i < len(str); i++ {
-			if m[str[i]] == 1 {
-				return i
-			}
+	for i := 0; i < len(str); i++ {
+		m[str[i]]++
+	}
+
+	for i := 0; i < len(str); i++ {
+		if m[str[i]] == 1 {
+			return i
+		}
 	}
 	return -1
 }
 
-//! 18 
+//! 18
 
 func LargestRange(array []int) []int {
 	min := array[0]
@@ -394,7 +358,7 @@ func LargestRange(array []int) []int {
 				result[0] = min
 				max = min
 				max++
-				} else if max == array[k] {
+			} else if max == array[k] {
 				max, result[1] = array[k], array[k]
 				max++
 			}
@@ -406,13 +370,13 @@ func LargestRange(array []int) []int {
 //! 19
 
 func containsNearbyDuplicate(nums []int, k int) bool {
-    m := make(map[int]int)
+	m := make(map[int]int)
 	for i := 0; i < len(nums); i++ {
 		_, ok := m[nums[i]]
 		if ok {
 			if i-m[nums[i]] <= k {
 				return true
-			} 
+			}
 		}
 		m[nums[i]] = i
 	}
@@ -423,7 +387,7 @@ func containsNearbyDuplicate(nums []int, k int) bool {
 
 func containsDuplicate(nums []int) bool {
 	m := make(map[int]bool)
-    for i := 0; i < len(nums); i++ {
+	for i := 0; i < len(nums); i++ {
 		if m[nums[i]] == true {
 			return true
 		}
@@ -431,8 +395,8 @@ func containsDuplicate(nums []int) bool {
 	}
 	return false
 }
-//! 21
 
+//! 21
 
 func intersectionisSubsequence(s string, t string) bool {
 	count := 0
@@ -449,7 +413,6 @@ func intersectionisSubsequence(s string, t string) bool {
 	}
 	return false
 }
-
 
 //! 22 o(n)
 
@@ -489,12 +452,11 @@ func intersect(nums1 []int, nums2 []int) []int {
 	return result
 }
 
-
 //! 24
 
 func getCommon(nums1 []int, nums2 []int) int {
 	m := make(map[int]bool)
-    for i := 0; i < len(nums1); i++ {
+	for i := 0; i < len(nums1); i++ {
 		m[nums1[i]] = true
 	}
 
@@ -514,15 +476,14 @@ func getCommon2(nums1 []int, nums2 []int) int {
 	for i < len(nums1) && j < len(nums2) {
 		if nums1[i] == nums2[j] {
 			return nums1[i]
-		} else if nums1[i] > nums2[j] { 
+		} else if nums1[i] > nums2[j] {
 			j++
 		} else {
 			i++
 		}
-	} 
+	}
 	return -1
 }
-
 
 //! 26
 
@@ -551,11 +512,10 @@ func findTheDifference(s string, t string) byte {
 			return t[i]
 		}
 	}
-	return 0 
+	return 0
 }
 
-
-//! 28 
+//! 28
 
 // func minSubArrayLen(target int, nums []int) int {
 //     shrink := 0
@@ -582,7 +542,7 @@ func findTheDifference(s string, t string) byte {
 
 func twoSum(nums []int, target int) []int {
 	left, right := 0, len(nums)-1
-	for left < right { 
+	for left < right {
 		sum := nums[left] + nums[right]
 		if sum == target {
 			return []int{left, right}
@@ -595,40 +555,39 @@ func twoSum(nums []int, target int) []int {
 	return []int{}
 }
 
-//! 30 
+//! 30
 
 func isAnagram(s string, t string) bool {
-    if len(s) != len(t) {
-        return false
-    }
-    m := make(map[byte]int)
-    for i := 0; i < len(s); i++ {
-        m[s[i]]++
-    }
-    for i := 0; i < len(t); i++ {
-        if m[t[i]] == 0 {
-            return false
-        }
-        m[t[i]]--
-    }
-    return true
+	if len(s) != len(t) {
+		return false
+	}
+	m := make(map[byte]int)
+	for i := 0; i < len(s); i++ {
+		m[s[i]]++
+	}
+	for i := 0; i < len(t); i++ {
+		if m[t[i]] == 0 {
+			return false
+		}
+		m[t[i]]--
+	}
+	return true
 }
-
 
 //! 31
 
 func isPalindrome(s string) bool {
 	left, right := 0, len(s)-1
 
-	for left < right  { 
+	for left < right {
 		if !unicode.IsLetter(rune(s[left])) && !unicode.IsDigit(rune(s[left])) {
 			left++
 			continue
-		} 
+		}
 		if !unicode.IsLetter(rune(s[right])) && !unicode.IsDigit(rune(s[right])) {
 			right--
 			continue
-		} 
+		}
 		leftChar := unicode.ToLower(rune(s[left]))
 		rightChar := unicode.ToLower(rune(s[right]))
 		if leftChar != rightChar {
@@ -636,13 +595,14 @@ func isPalindrome(s string) bool {
 		}
 		left++
 		right--
-		}
+	}
 	return true
 }
-//! 32
+
+// ! 32
 func singleNumber(nums []int) int {
 	result := 0
-    for i := 0; i < len(nums); i++ {
+	for i := 0; i < len(nums); i++ {
 		result ^= nums[i]
 	}
 	return result
@@ -653,12 +613,12 @@ func singleNumber(nums []int) int {
 func maxArea(height []int) int {
 
 	maxArea := 0
-    left, right := 0 , len(height)-1
-	
-	for left < right { 
+	left, right := 0, len(height)-1
+
+	for left < right {
 		area := 0
-		area = min(height[left], height[right]) * (right-left)
-		if area > maxArea  {
+		area = min(height[left], height[right]) * (right - left)
+		if area > maxArea {
 			maxArea = area
 		}
 
@@ -673,19 +633,15 @@ func maxArea(height []int) int {
 
 //! 34
 
-
 func getConcatenation(nums []int) []int {
 	a := len(nums)
-    for i := 0; i < a; i++ {
+	for i := 0; i < a; i++ {
 		nums = append(nums, nums[i])
 	}
 	return nums
 }
 
-
-//! 35 
-
-
+//! 35
 
 // func lengthOfLongestSubstring(s string) int {
 // 	longest := 0
@@ -698,38 +654,36 @@ func getConcatenation(nums []int) []int {
 // 			longest = max(longest, w)
 // 		}
 // 		m[s[left]] = true
-// 	} 
-		
+// 	}
+
 // 	return longest
 // }
 
-
 //! 36
-
 
 func judgeCircle(moves string) bool {
 	x := 0
 	y := 0
 
-    for i := 0; i < len(moves); i++ {
+	for i := 0; i < len(moves); i++ {
 		switch string(moves[i]) {
-			case "R":
-				x++
-			case "L":
-				x--
-			case "U":
-				y++
-			case "D":
-				y--
+		case "R":
+			x++
+		case "L":
+			x--
+		case "U":
+			y++
+		case "D":
+			y--
 		}
 	}
-	return x == 0 && y == 0 
+	return x == 0 && y == 0
 }
 
 //! 37
 
 func findMaxConsecutiveOnes(nums []int) int {
-    count := 0
+	count := 0
 	maxCount := 0
 	for i := 0; i < len(nums); i++ {
 		if nums[i] == 1 {
@@ -737,7 +691,7 @@ func findMaxConsecutiveOnes(nums []int) int {
 			if maxCount < count {
 				maxCount = count
 			}
-		} else{
+		} else {
 			count = 0
 		}
 	}
@@ -747,7 +701,7 @@ func findMaxConsecutiveOnes(nums []int) int {
 //! 38
 
 func shuffle(nums []int, n int) []int {
-    result := make([]int,0, 2*n)
+	result := make([]int, 0, 2*n)
 	for i := 0; i < n; i++ {
 		result = append(result, nums[i], nums[i+n])
 	}
@@ -760,41 +714,40 @@ func isMonotonic(nums []int) bool {
 	count := 0
 	first, last := 0, len(nums)-1
 
-    for i := 0; i < len(nums)-1; i++ {
+	for i := 0; i < len(nums)-1; i++ {
 		if nums[i] <= nums[i+1] && nums[first] <= nums[last] {
 			count++
 		} else if nums[i] >= nums[i+1] && nums[first] > nums[last] {
 			count--
 		}
 	}
-	if -(count) == len(nums)-1{
+	if -(count) == len(nums)-1 {
 		return true
 	} else if count == len(nums)-1 {
 		return true
 	}
 	return false
 }
-//! 40 -> 
+
+//! 40 ->
 
 func isMonotonic2(nums []int) bool {
-    increasing := true
-    decreasing := true
+	increasing := true
+	decreasing := true
 
+	for i := 1; i < len(nums); i++ {
+		if nums[i] < nums[i-1] {
+			increasing = false
+		}
 
-    for i := 1; i < len(nums); i++ {
-        if nums[i] < nums[i-1] {
-            increasing = false
-        }
-
-
-        if nums[i] > nums[i-1] {
-            decreasing = false
-        }
-    }
+		if nums[i] > nums[i-1] {
+			decreasing = false
+		}
+	}
 
 	fmt.Println(increasing)
 	fmt.Println(decreasing)
-    return increasing || decreasing
+	return increasing || decreasing
 }
 
 //! 41
@@ -806,31 +759,31 @@ func prefixSum(nums []int) []int {
 		sum += nums[i]
 		result = append(result, sum)
 	}
-	return result		
+	return result
 }
 
 //! 42
 
 func fixedSize(nums []int, k int) []int {
-	 shrink := 0
-	 sum := 0
-	 result := []int{}
+	shrink := 0
+	sum := 0
+	result := []int{}
 
-	 for i := 0; i < len(nums); i++ {
+	for i := 0; i < len(nums); i++ {
 		sum += nums[i]
 		if i-shrink+1 == k {
 			result = append(result, sum)
 			sum -= nums[shrink]
 			shrink++
 		}
-	 }
-	 return result 
+	}
+	return result
 }
 
 //! 43 -> ++++++++++++++++++++++++
 
 func findMaxAverage(nums []int, k int) float64 {
-    shrink := 0
+	shrink := 0
 	sum := 0
 	maxResult := 0
 	for i := 0; i < len(nums); i++ {
@@ -845,11 +798,10 @@ func findMaxAverage(nums []int, k int) float64 {
 			shrink++
 		}
 	}
-	return float64(maxResult)/float64(k)
+	return float64(maxResult) / float64(k)
 }
 
 //! 44
-
 
 func ContainsDuplicate(nums []int) bool {
 	m := make(map[int]bool)
@@ -862,16 +814,14 @@ func ContainsDuplicate(nums []int) bool {
 	return false
 }
 
-
 //! 45 -> O(n)
-
 
 func TwoSum(nums []int, target int) []int {
 	m := make(map[int]int)
 
 	for i := 0; i < len(nums); i++ {
 		need := target - nums[i]
-		if _ , ok := m[need]; ok {
+		if _, ok := m[need]; ok {
 			if m[need] != i {
 				return []int{m[need], i}
 			}
@@ -879,10 +829,9 @@ func TwoSum(nums []int, target int) []int {
 		m[nums[i]] = i
 
 	}
-	
+
 	return []int{}
 }
-
 
 //! 46
 
@@ -908,15 +857,15 @@ func lengthOfLongestSubstring(s string) int {
 
 	return count
 }
+
 //! 47
 
-
 func missingMultiple(nums []int, k int) int {
-    m := make(map[int]bool)
+	m := make(map[int]bool)
 
-    for i := 0; i < len(nums); i++ {
-        m[nums[i]] = true
-    }
+	for i := 0; i < len(nums); i++ {
+		m[nums[i]] = true
+	}
 
 	for need := k; ; need += k {
 		if !m[need] {
@@ -924,10 +873,11 @@ func missingMultiple(nums []int, k int) int {
 		}
 	}
 }
+
 //! 48
 
 func canPlaceFlowers(flowerbed []int, n int) bool {
-    count := 0
+	count := 0
 	flowerbed = append([]int{0}, flowerbed...)
 	flowerbed = append(flowerbed, 0)
 	for i := 0; i < len(flowerbed)-1; i++ {
@@ -935,10 +885,10 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 			count = 0
 		} else if n > 0 {
 			if count == 1 && flowerbed[i+1] != 1 {
-				flowerbed[i] = 1			
-				count = 0 
+				flowerbed[i] = 1
+				count = 0
 				n--
-			} else { 
+			} else {
 				count++
 			}
 		}
@@ -948,9 +898,9 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 
 //! 49
 
-func moveZeroes(nums []int)  {
-	left, right := 0,0
-	for right < len(nums)  {
+func moveZeroes(nums []int) {
+	left, right := 0, 0
+	for right < len(nums) {
 		if nums[right] == 0 {
 			right++
 		} else {
@@ -964,14 +914,14 @@ func moveZeroes(nums []int)  {
 //! 50
 
 func maxOperations(nums []int, k int) int {
-    m := make(map[int]int)
+	m := make(map[int]int)
 	count := 0
 	for i := 0; i < len(nums); i++ {
-		need := k-nums[i]
+		need := k - nums[i]
 		if m[need] > 0 {
 			count++
 			m[need]--
-		} else { 
+		} else {
 			m[nums[i]]++
 		}
 	}
@@ -983,7 +933,7 @@ func maxOperations(nums []int, k int) int {
 func kidsWithCandies(candies []int, extraCandies int) []bool {
 	max := candies[0]
 	result := []bool{}
-    for i := 0; i < len(candies); i++ {
+	for i := 0; i < len(candies); i++ {
 		if max < candies[i] {
 			max = candies[i]
 		}
@@ -991,43 +941,173 @@ func kidsWithCandies(candies []int, extraCandies int) []bool {
 	for i := 0; i < len(candies); i++ {
 		if candies[i]+extraCandies >= max {
 			result = append(result, true)
-		}else { 
+		} else {
 			result = append(result, false)
 		}
 	}
 	return result
 }
+
 //! 52
 
+func removeDuplicates(nums []int) int {
+	count := 0
+	k := nums[0]
+	left, right := 0, 0
 
+	for right < len(nums) {
 
+		if nums[right] == k {
+			count++
+		} else {
+			count = 1
+			k = nums[right]
+		}
+
+		if count <= 2 {
+			nums[left], nums[right] = nums[right], nums[left]
+			left++
+			right++
+		} else {
+			right++
+		}
+
+	}
+	return left
+
+}
+
+//! 53
+
+func uniqueOccurrences(arr []int) bool {
+	countNums := map[int]int{}
+
+	for i := 0; i < len(arr); i++ {
+		countNums[arr[i]]++
+	}
+	uniqueCount := map[int]bool{}
+	for _, freq := range countNums {
+		if uniqueCount[freq] {
+			return false
+		}
+		uniqueCount[freq] = true
+	}
+	return true
+}
+
+//! 54 time O(n), space O(n) -> (n/2) -> easy
+
+func majorityElement(nums []int) int {
+	m := make(map[int]int)
+	max := 0
+	index := 0
+	for i := 0; i < len(nums); i++ {
+		m[nums[i]]++
+		if max < m[nums[i]] {
+			max = m[nums[i]]
+			index = nums[i]
+		}
+	}
+	return index
+}
+
+//! 55 time O(n), space O(1) -> easy (n/2)
+
+func majorityElement2(nums []int) int {
+	count := 0
+	candidate := 0
+	for _, num := range nums {
+		if count == 0 {
+			candidate = num
+		}
+		if num == candidate {
+			count++
+		} else {
+			count--
+		}
+	}
+	return candidate
+}
+
+//! 56 medium  (n/3) -> time O(n), space O(n)
+
+func majorityElement3(nums []int) []int {
+	result := []int{}
+	m := make(map[int]int)
+	for i := 0; i < len(nums); i++ {
+
+		m[nums[i]]++
+
+		if m[nums[i]] > len(nums)/3 {
+
+			if len(result) == 0 {
+				result = append(result, nums[i])
+			} else if result[0] != nums[i] {
+				result = append(result, nums[i])
+			}
+		}
+	}
+	return result
+}
+
+//! 57   didint work
+
+func containsNearbyAlmostDuplicate(nums []int, indexDiff int, valueDiff int) bool {
+	matchIndx := false
+	matchVal := false
+	m := make(map[int]int)
+
+	for i := 0; i < len(nums); i++ {
+		if index, ok := m[nums[i]]; ok {
+			if float64(indexDiff) >= math.Abs(float64(index-i)) {
+				matchIndx = true
+			}
+			if float64(valueDiff) >= math.Abs(float64(nums[index]-nums[i])) {
+				matchVal = true
+			}
+			if matchIndx && matchVal {
+				return true
+			}
+		}
+		m[nums[i]] = i
+
+	}
+
+	return matchIndx && matchVal
+}
 
 func main() {
 
+	nums := []int{8, 7, 15, 1, 6, 1, 9, 15}
+	indexDiff := 1
+	valueDiff := 3
+	result := containsNearbyAlmostDuplicate(nums, indexDiff, valueDiff)
+	fmt.Println(result)
 
+	// nums:= []int{6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6}
+	// result := majorityElement3(nums)
+	// fmt.Println(result)
 
+	// nums:= []int{1,2,2,1,1,3}
+	// result := uniqueOccurrences(nums)
+	// fmt.Println(result)
 
+	// nums:= []int{0,0,1,1,1,1,2,3,3}
+	// result := removeDuplicates(nums)
+	// fmt.Println(result)
 
 	// nums:= []int{2,0,1}
 	// sortColors(nums)
-
-	
 
 	// candies:= []int{2,3,5,1,3}
 	// extraCandies := 3
 	// result := kidsWithCandies(candies, extraCandies)
 	// fmt.Println(result)
 
-
-
-
 	// nums:= []int{3,3,3,3}
 	// k := 6
 	// result := maxOperations(nums, k)
 	// fmt.Println(result)
-
-
-
 
 	// nums:= []int{1}
 	// moveZeroes(nums)
@@ -1037,38 +1117,28 @@ func main() {
 	// result := canPlaceFlowers(flowerbed, n)
 	// fmt.Println(result)
 
-
-
 	// nums:= []int{1,3,4,2,2}
 	// k := 99
 	// result := missingMultiple(nums, k)
 	// fmt.Println(result)
 
-
-
 	// word:= "qwwkew"
 	// result := lengthOfLongestSubstring(word)
 	// fmt.Println(result)
-
 
 	// nums:= []int{3,3}
 	// target := 9
 	// result := TwoSum(nums, target)
 	// fmt.Println(result)
 
-
 	// nums:= []int{1,2,3,3}
 	// result := ContainsDuplicate(nums)
 	// fmt.Println(result)
-
-
 
 	// nums:= []int{1,2,3,4,5,6}
 	// k := 3
 	// result := fixedSize(nums, k)
 	// fmt.Println(result)
-
-
 
 	// nums:= []int{1,2,3,4,5}
 	// result := prefixSum(nums)
@@ -1077,7 +1147,6 @@ func main() {
 	// nums:= []int{1,2,3,4,5}
 	// result := isMonotonic2(nums)
 	// fmt.Println(result)
-
 
 	// nums:= []int{4,4,4,4}
 	// result := isMonotonic(nums)
@@ -1088,21 +1157,17 @@ func main() {
 	// result := shuffle(nums, n)
 	// fmt.Println(result)
 
-
 	// nums:= []int{1,1,0,1,1,1}
 	// result := findMaxConsecutiveOnes(nums)
 	// fmt.Println(result)
 
-	
 	// moves:= "RRLLDDDUUU"
 	// result := judgeCircle(moves)
 	// fmt.Println(result)
 
-
 	// word:= "abcabcbb"
 	// result := lengthOfLongestSubstring(word)
 	// fmt.Println(result)
-
 
 	// nums:= []int{1,2,3,4}
 	// result := getConcatenation(nums)
@@ -1112,78 +1177,58 @@ func main() {
 	// result := maxArea(nums)
 	// fmt.Println(result)
 
-
-
-
 	// fmt.Println(7^3)
 	// nums:= []int{4,1,2,1,2,4,7}
 	// result := singleNumber(nums)
 	// fmt.Println(result)
 
-
 	// s:= "a77a"
 	// result := isPalindrome(s)
 	// fmt.Println(result)
-
 
 	// s:= "ab"
 	// t := "aba"
 	// result := isAnagram(s, t)
 	// fmt.Println(result)
 
-
 	// nums:= []int{1,2,3,4}
 	// target := 6
 	// result := twoSum(nums, target)
 	// fmt.Println(result)
-
-
 
 	// nums:= []int{2,3,1,2,4,3}
 	// target := 7
 	// result := minSubArrayLen(target, nums)
 	// fmt.Println(result)
 
-
-
 	// word1:= "a"
 	// word2:= "aa"
 	// result := findTheDifference(word1, word2)
 	// fmt.Println(result)
 
-
-
-
-
 	// word:= "pwwkew"
 	// result := lengthOfLongestSubstring(word)
 	// fmt.Println(result)
-
 
 	// nums1 := []int{1,2,3,4,5,6,7,1,1,1,1,1,1,1,1}
 	// nums2 := []int{4}
 	// result := getCommon2(nums1, nums2)
 	// fmt.Println(result)
 
-
 	// nums1 := []int{19}
 	// nums2 := []int{4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,11}
 	// result := getCommon(nums1, nums2)
 	// fmt.Println(result)
-
 
 	// nums1 := []int{4,9,5,4,1}
 	// nums2 := []int{4,9,5,4,9,5,1,1}
 	// result := intersect(nums1, nums2)
 	// fmt.Println(result)
 
-
-
 	// nums1 := []int{4,9,5}
 	// nums2 := []int{4,9,5,4,9,5}
 	// result := intersection(nums1, nums2)
 	// fmt.Println(result)
-
 
 	// word1 := ""
 	// word2 := "ahbgdc"
@@ -1194,42 +1239,30 @@ func main() {
 	// result := containsDuplicate(nums)
 	// fmt.Println(result)
 
-
 	// nums := []int{1,1}
 	// target := 2
 	// result := containsNearbyDuplicate(nums, target)
 	// fmt.Println(result)
 
-
-
 	// nums := []int{4, 2, 1, 3, 6}
 	// result := LargestRange(nums)
 	// fmt.Println(result)
-
-
-
 
 	// word := "a,b,c,a,b"
 	// result := FirstNonRepeatingCharacter2(word)
 	// fmt.Println(result)
 
-
-
 	// word := "aaaaaaaaaaaaaaaaaaaabbbbbbbbbbcccccccccccdddddddddddeeeeeeeeffghgh"
 	// result := FirstNonRepeatingCharacter(word)
 	// fmt.Println(result)
-
 
 	// nums := []int{-5, -5, 2, 3, -2}
 	// resultNums := ZeroSumSubarray(nums)
 	// fmt.Println(resultNums)
 
-
 	// nums := []int{2, 1, 5, 2, 3, 3, 4}
 	// resultNums := FirstDuplicateValue(nums)
 	// fmt.Println(resultNums)
-
-
 
 	// nums := []int{2, 1, 5, 2, 3, 3, 4}
 	// resultNums := sortingElement(nums)
@@ -1239,13 +1272,10 @@ func main() {
 	// waterResult := MaxArea(water)
 	// fmt.Println(waterResult)
 
-
-
 	// array := []int{1, 2, 4, 5, 6}
 	// targetElement := 3
 	// resulstElement := MoveElementToEnd3(array, targetElement)
 	// fmt.Println(resulstElement)
-
 
 	// moveZero := []int{1,0,0,3,12}
 	// resultZero := MoveZeroes2(moveZero)
@@ -1255,23 +1285,17 @@ func main() {
 	// resultDuplicates := removeDuplicates(duplicates)
 	// fmt.Print(resultDuplicates,"\n")
 
-
 	// seats := []int{1,1,1}
 	// resultSeats := BestSeat(seats)
 	// fmt.Println(resultSeats)
-
-
 
 	// moton := []int{1, 2, 3, 3, 2, 1}
 	// resultMoton := IsMonotonic(moton)
 	// fmt.Println(resultMoton)
 
-
 	// numUnsort := []int{-4,-23,0,3,10}
 	// resultSort := SortedSquares(numUnsort)
 	// fmt.Println(resultSort)
-
-
 
 	// array := []int{5, 5, 5, 5, 5, 5, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12}
 	// targetElement := 5

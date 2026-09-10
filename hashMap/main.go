@@ -100,17 +100,64 @@ func longestConsecutive(nums []int) int {
 	return count
 }
 
-//! 6
+//! 6 didint work
 
-func uniqueOccurrences(arr []int) bool {
-    
+func wordPattern(pattern string, s string) bool {
+    m1 := make(map[string]string)
+	m2 := make(map[string]string)
+	count := 0
+	for i := 0; i < len(pattern); i++ {
+		word := ""
+		for k := count; k < len(s); k++ {
+			if string(s[k]) != " " {
+				word += string(s[k])
+				count++
+			} else {
+				if _, ok := m1[string(pattern[i])]; ok {
+					if m2[string(word)] != string(pattern[i]) || m1[string(pattern[i])] != string(word) {
+						return false
+					}
+				} else { 
+					m1[string(pattern[i])] = string(word)
+					m2[string(word)] = string(pattern[i])
+				}
+			}
+		}
+	}
+	return true
 }
+
+//! 7
+
+func checkIfPangram(sentence string) bool {
+	m := make(map[byte]bool)
+	for i := 0; i < len(sentence); i++ {
+		m[sentence[i]] = true
+	}
+	return len(m) == 26
+}
+
+
 
 func main() {
 
-	nums := []int{0,0,1,2,3,4,5,6,7,8}
-	result := longestConsecutive(nums)
+
+    sentence := "thequickbrownfoxjumpsoverthelazydog"
+	result := checkIfPangram(sentence)
 	fmt.Println(result)
+
+
+
+	// pattern := "aaaa"
+	// s := "dog dog dog dog"
+	// result := wordPattern(pattern, s)
+	// fmt.Println(result)
+
+
+
+	// nums := []int{0,0,1,2,3,4,5,6,7,8}
+	// result := longestConsecutive(nums)
+	// fmt.Println(result)
 
 
 

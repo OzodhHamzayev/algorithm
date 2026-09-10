@@ -159,13 +159,79 @@ func minSubArrayLen(target int, nums []int) int {
 
 //! 9
 
+func longestOnes(nums []int, k int) int {
+    count := 0
+	shrink := 0
+	maximum := 0
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == 0 {
+			count++
+		}
+		for count > k {
+			if nums[shrink] == 0 {
+				shrink++
+				count--
+			}else {
+				shrink++
+			}
+		}	
+		maximum = max(i-shrink+1, maximum)
+	}
+	return maximum
+}
+
+//! 10
+
+func maximumSubarraySum(nums []int, k int) int64 {
+    shrink := 0
+	maximum, sum := 0, 0
+	
+	m := make(map[int]bool)
+
+	for i := 0; i < len(nums); i++ {
+		for m[nums[i]] {
+			sum -= nums[shrink]
+			delete(m, nums[shrink])
+			shrink++
+		}
+		m[nums[i]] = true
+		sum += nums[i]
+		if i-shrink+1 > k {
+			sum -= nums[shrink]
+			delete(m, nums[shrink])
+			shrink++
+		}
+
+		if i-shrink+1 == k {
+			maximum = max(sum, maximum)
+		}
+		
+	}
+	return int64(maximum)
+}
+//! 11
+
 
 func main() { 
 
-	k := 7
-	nums := []int{2,3,1,2,4,3}
-	result := minSubArrayLen(k, nums)
-	fmt.Println(result)
+
+	// nums := []int{1,5,4,2,9,9,9,1,4}
+	// k := 3
+	// result := maximumSubarraySum(nums,k)
+	// fmt.Println(result)
+
+
+	// nums := []int{1,1,1,0,0,0,1,1,1,0,1}
+	// k := 2
+	// result := longestOnes(nums,k)
+	// fmt.Println(result)
+
+
+	// k := 7
+	// nums := []int{2,3,1,2,4,3}
+	// result := minSubArrayLen(k, nums)
+	// fmt.Println(result)
 
 	// s := "abciiidef"
 	// k := 3
